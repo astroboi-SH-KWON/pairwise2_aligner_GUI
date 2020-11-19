@@ -165,21 +165,27 @@ def setupGUI():
     notebk = ttk.Notebook(window)
     notebk.pack()
 
+    # first tab
     frame1 = Frame(window)
     notebk.add(frame1, text='aligner')
 
+    # st seq A label & its input
     seq_a_label = Label(frame1, text='seq A ', font='Courier 10 bold', relief=RAISED)
     seq_a_label.grid(row=1, column=0, padx=5, pady=5)
     input_seq_a = Entry(frame1, font='Terminal 10', width=50)
     input_seq_a.grid(row=1, column=1, padx=3, pady=3)
     # input_seq_a.bind('<Return>', aligner)
+    # en seq A label & its input
 
+    # st seq B label & its input
     seq_b_label = Label(frame1, text='seq B ', font='Courier 10 bold', relief=RAISED)
     seq_b_label.grid(row=2, column=0, padx=5, pady=5)
     input_seq_b = Entry(frame1, font='Terminal 10', width=50)
     input_seq_b.grid(row=2, column=1, padx=3, pady=3)
     input_seq_b.bind('<Return>', aligner)
+    # en seq B label & its input
 
+    # st align options
     align_opt_label1 = Label(frame1, relief=RAISED)
     align_opt_label1.grid(row=0, column=2, padx=5, pady=5)
     align_radio = StringVar()
@@ -193,24 +199,30 @@ def setupGUI():
     align_opt_label2.grid(row=0, columnspan=2, padx=5, pady=5)
     gap_opn_label = Label(align_opt_label2, text='gap open penalty :', font='Courier 10 bold', relief=FLAT)
     gap_opn_label.grid(row=0, column=0, padx=5, pady=5)
+    # input of gap open penalty
     gap_opn_pnlty = Entry(align_opt_label2, font='Terminal 10', width=5)
     gap_opn_pnlty.grid(row=0, column=1, padx=3, pady=3)
     gap_opn_pnlty.insert(0, 10.0)
     extensn_label = Label(align_opt_label2, text=' extension penalty :', font='Courier 10 bold', relief=FLAT)
     extensn_label.grid(row=0, column=2, padx=5, pady=5)
+    # input of extension penalty
     extensn_pnlty = Entry(align_opt_label2, font='Terminal 10', width=5)
     extensn_pnlty.grid(row=0, column=3, padx=3, pady=3)
     extensn_pnlty.insert(0, 0.5)
+    # en align options
 
+    # buttons
     aligner_btn = Button(frame1, text='align', font='Courier 20 bold', command=aligner, height=10)
     aligner_btn.grid(rowspan=1, column=2, padx=3, pady=3)
 
     reset_btn = Button(frame1, text='reset', font='Courier 10 bold', fg='red', command=reset)
     reset_btn.grid(row=2, column=2, padx=3, pady=3)
 
+    # Text for result
     res_text = Text(frame1, font='Terminal 10', relief=RAISED, width=65, height=30)
     res_text.grid(row=3, columnspan=2, padx=5, pady=5)
 
+    # second tab
     frame2 = Frame(window)
     notebk.add(frame2, text='about')
     about = """
