@@ -2,6 +2,6 @@
 
 how to make .exe file
 
-pyinstaller --onefile --noconsol --icon=dna.ico pairwise2_aligner.py
+    pyinstaller --onefile --noconsol --icon=dna.ico pairwise2_aligner.py
 
-then check dist folder
+    then check dist folder

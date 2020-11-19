@@ -107,62 +107,6 @@ def reset():
     align_radio.set('global')
 
 
-def setupGUI():
-    global window
-    global input_seq_a
-    global input_seq_b
-    global align_radio
-    global gap_opn_pnlty
-    global extensn_pnlty
-    global res_text
-
-    window = Tk()
-    window.title('pairwise2 aligner')
-
-    seq_a_label = Label(window, text='seq A ', font='Courier 10 bold', relief=RAISED)
-    seq_a_label.grid(row=1, column=0, padx=5, pady=5)
-    input_seq_a = Entry(window, font='Terminal 10', width=50)
-    input_seq_a.grid(row=1, column=1, padx=3, pady=3)
-    # input_seq_a.bind('<Return>', aligner)
-
-    seq_b_label = Label(window, text='seq B ', font='Courier 10 bold', relief=RAISED)
-    seq_b_label.grid(row=2, column=0, padx=5, pady=5)
-    input_seq_b = Entry(window, font='Terminal 10', width=50)
-    input_seq_b.grid(row=2, column=1, padx=3, pady=3)
-    input_seq_b.bind('<Return>', aligner)
-
-    align_opt_label1 = Label(window, relief=RAISED)
-    align_opt_label1.grid(row=0, column=2, padx=5, pady=5)
-    align_radio = StringVar()
-    global_opt = ttk.Radiobutton(align_opt_label1, text='global', value='global', variable=align_radio, command=lambda: set_align_opt('global'))
-    global_opt.grid(row=0, column=0)
-    local_opt = ttk.Radiobutton(align_opt_label1, text=' local ', value='local', variable=align_radio, command=lambda: set_align_opt('local'))
-    local_opt.grid(row=1, column=0)
-    align_radio.set('global')
-
-    align_opt_label2 = Label(window, relief=RAISED)
-    align_opt_label2.grid(row=0, columnspan=2, padx=5, pady=5)
-    gap_opn_label = Label(align_opt_label2, text='gap open penalty :', font='Courier 10 bold', relief=FLAT)
-    gap_opn_label.grid(row=0, column=0, padx=5, pady=5)
-    gap_opn_pnlty = Entry(align_opt_label2, font='Terminal 10', width=5)
-    gap_opn_pnlty.grid(row=0, column=1, padx=3, pady=3)
-    gap_opn_pnlty.insert(0, 10.0)
-    extensn_label = Label(align_opt_label2, text=' extension penalty :', font='Courier 10 bold', relief=FLAT)
-    extensn_label.grid(row=0, column=2, padx=5, pady=5)
-    extensn_pnlty = Entry(align_opt_label2, font='Terminal 10', width=5)
-    extensn_pnlty.grid(row=0, column=3, padx=3, pady=3)
-    extensn_pnlty.insert(0, 0.5)
-
-    aligner_btn = Button(window, text='align', font='Courier 20 bold', command=aligner, height=10)
-    aligner_btn.grid(rowspan=1, column=2, padx=3, pady=3)
-
-    reset_btn = Button(window, text='reset', font='Courier 10 bold', fg='red', command=reset)
-    reset_btn.grid(row=2, column=2, padx=3, pady=3)
-
-    res_text = Text(window, font='Terminal 10', relief=RAISED, width=65, height=30)
-    res_text.grid(row=3, columnspan=2, padx=5, pady=5)
-
-
 def aligner():
     global input_seq_a
     global input_seq_b
@@ -204,6 +148,89 @@ def aligner():
         except Exception as err:
             # messagebox.showerror('error', str(err))
             res_text.insert(CURRENT, 'error : \n' + str(err) + '\n')
+
+
+def setupGUI():
+    global window
+    global input_seq_a
+    global input_seq_b
+    global align_radio
+    global gap_opn_pnlty
+    global extensn_pnlty
+    global res_text
+
+    window = Tk()
+    window.title('pairwise2 aligner')
+
+    notebk = ttk.Notebook(window)
+    notebk.pack()
+
+    frame1 = Frame(window)
+    notebk.add(frame1, text='aligner')
+
+    seq_a_label = Label(frame1, text='seq A ', font='Courier 10 bold', relief=RAISED)
+    seq_a_label.grid(row=1, column=0, padx=5, pady=5)
+    input_seq_a = Entry(frame1, font='Terminal 10', width=50)
+    input_seq_a.grid(row=1, column=1, padx=3, pady=3)
+    # input_seq_a.bind('<Return>', aligner)
+
+    seq_b_label = Label(frame1, text='seq B ', font='Courier 10 bold', relief=RAISED)
+    seq_b_label.grid(row=2, column=0, padx=5, pady=5)
+    input_seq_b = Entry(frame1, font='Terminal 10', width=50)
+    input_seq_b.grid(row=2, column=1, padx=3, pady=3)
+    input_seq_b.bind('<Return>', aligner)
+
+    align_opt_label1 = Label(frame1, relief=RAISED)
+    align_opt_label1.grid(row=0, column=2, padx=5, pady=5)
+    align_radio = StringVar()
+    global_opt = ttk.Radiobutton(align_opt_label1, text='global', value='global', variable=align_radio, command=lambda: set_align_opt('global'))
+    global_opt.grid(row=0, column=0)
+    local_opt = ttk.Radiobutton(align_opt_label1, text=' local ', value='local', variable=align_radio, command=lambda: set_align_opt('local'))
+    local_opt.grid(row=1, column=0)
+    align_radio.set('global')
+
+    align_opt_label2 = Label(frame1, relief=RAISED)
+    align_opt_label2.grid(row=0, columnspan=2, padx=5, pady=5)
+    gap_opn_label = Label(align_opt_label2, text='gap open penalty :', font='Courier 10 bold', relief=FLAT)
+    gap_opn_label.grid(row=0, column=0, padx=5, pady=5)
+    gap_opn_pnlty = Entry(align_opt_label2, font='Terminal 10', width=5)
+    gap_opn_pnlty.grid(row=0, column=1, padx=3, pady=3)
+    gap_opn_pnlty.insert(0, 10.0)
+    extensn_label = Label(align_opt_label2, text=' extension penalty :', font='Courier 10 bold', relief=FLAT)
+    extensn_label.grid(row=0, column=2, padx=5, pady=5)
+    extensn_pnlty = Entry(align_opt_label2, font='Terminal 10', width=5)
+    extensn_pnlty.grid(row=0, column=3, padx=3, pady=3)
+    extensn_pnlty.insert(0, 0.5)
+
+    aligner_btn = Button(frame1, text='align', font='Courier 20 bold', command=aligner, height=10)
+    aligner_btn.grid(rowspan=1, column=2, padx=3, pady=3)
+
+    reset_btn = Button(frame1, text='reset', font='Courier 10 bold', fg='red', command=reset)
+    reset_btn.grid(row=2, column=2, padx=3, pady=3)
+
+    res_text = Text(frame1, font='Terminal 10', relief=RAISED, width=65, height=30)
+    res_text.grid(row=3, columnspan=2, padx=5, pady=5)
+
+    frame2 = Frame(window)
+    notebk.add(frame2, text='about')
+    about = """
+THIS APP WAS MADE WITH pairwise2 FROM biopython.
+IT IS A FREE APP LIKE biopython.
+YOU CAN DOWNLOAD AND EDIT THE ORIGINAL 
+BY FOLLOWING THE LINK BELOW.
+WE ARE NOT RESPONSIBLE FOR ANY DAMAGE AFTER DOWNLOAD AND USE.
+_________________________________________________________
+https://github.com/astroboi-SH-KWON/pairwise2_aligner_GUI
+_________________________________________________________
+
+이 app은 biopython 기반의 pairwise2를 사용하였습니다.
+biopython이 그렇듯 이 app은 완전 무료 제품입니다.
+github에 원래 소스를 받아서 수정하셔도 됩니다.
+우리는 이 app에 의해 생기는 
+사용자의 어떠한 손해도 책임지지 않습니다.
+    """
+    about_label = Label(frame2, font='Terminal 15', text=about, relief=RAISED, width=65, height=30)
+    about_label.grid(row=1, columnspan=2, padx=5, pady=5)
 
 
 if __name__ == '__main__':
