@@ -389,15 +389,42 @@ def setupGUI():
     # example image
     # os.chdir(os.getcwd())
     # load_image = PhotoImage(file=os.getcwd() + '/example.png')
-    load_image = PhotoImage(file='example.png')
-    image_label = Label(frame2, image=load_image, width=400, height=95)
+    # load_image = PhotoImage(file='example.png')
+    # image_label = Label(frame2, image=load_image, width=400, height=95)
+    image_label = Label(frame2, width=400, height=95)
     image_label.grid(row=2, columnspan=2, padx=3, pady=3)
+    example = [
+            [' ', 'A', 'B']
+            , [1, 'seq_A', 'seq_B']
+            , [2, 'ATCGATGCTGATGCGCGACTAGTC', 'agtcgatcgtagcggtacgta']
+            , [3, 'ATCGATGCTGATGCGCGACTAGTC', 'AGATCGTAGCTAGTCGATCTAG']
+            , [4, 'atcgatgctgatgcgcgactagtc', 'agtcgatcgtagcggtacgta']
+            , [5, 'atcgatgctgatgcgcgactagtc', 'AGTCGATCGTAGCGGTACGTA']
+            , [6, '', '']
+            ]
+    for i in range(len(example)):
+        for j in range(len(example[i])):
+            bg = 'white'
+            wid = 30
+            font = 'Arial'
+            if j == 0 or i == 0:
+                bg = 'light gray'
+                font = 'Arial bold'
+            if j == 0:
+                wid = 3
+
+            e = Entry(image_label, width=wid, bg=bg, font=(font, 8))
+            e.grid(row=i, column=j)
+            e.insert(END, example[i][j])
+
+    example_label = Label(frame2, text='sample\nexcel\ninput file', font='Courier 13 bold', fg='gray', relief=FLAT)
+    example_label.grid(row=2, column=2, padx=1, pady=1)
 
     # Text for log
-    log_text = Text(frame2, font='Terminal 10', relief=RAISED, width=65, height=25)
+    log_text = Text(frame2, font='Terminal 10', relief=RAISED, width=65, height=23)
     log_text.grid(row=3, columnspan=2, padx=3, pady=3)
 
-    aligner_btn2 = Button(frame2, text='align', font='Courier 20 bold', command=get_align_file, height=9)
+    aligner_btn2 = Button(frame2, text='align', font='Courier 20 bold', command=get_align_file, height=7)
     aligner_btn2.grid(row=3, column=2, padx=3, pady=3)
 
 
@@ -415,7 +442,7 @@ https://github.com/astroboi-SH-KWON/pairwise2_aligner_GUI
 _________________________________________________________
 
 이 app은 biopython 기반의 pairwise2를 사용하였습니다.
-biopython이 그렇듯 이 app은 완전 무료 제품입니다.
+biopython처럼 이 app은 완전 무료 제품입니다.
 github에 원래 소스를 받아서 수정하셔도 됩니다.
 우리는 이 app에 의해 생기는 
 사용자의 어떠한 손해도 책임지지 않습니다.
