@@ -16,5 +16,4 @@ how to make .exe file
 
     then check dist folder
 
-excute file link
-[a relative link](./aligner.exe)
+[excute file link](./aligner.exe)
