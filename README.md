@@ -15,3 +15,6 @@ how to make .exe file
     pyinstaller --onefile --noconsol --icon=dna.ico --add-data example.PNG;. aligner.py
 
     then check dist folder
+
+excute file link
+[a relative link](./aligner.exe)
